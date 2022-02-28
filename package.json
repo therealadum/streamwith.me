@@ -1,0 +1,25 @@
+{
+  "name": "streamwith.me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:therealadum/streamwith.me.git",
+  "author": "Adam Shurson <shurson.adam@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "_services/*"
+  ],
+  "dependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "graphql": "^16.3.0"
+  },
+  "scripts": {
+    "g": "graphql-codegen --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.5",
+    "@graphql-codegen/typescript-operations": "2.3.2",
+    "@graphql-codegen/typescript-react-apollo": "3.2.8"
+  }
+}

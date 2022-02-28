@@ -1,0 +1,22 @@
+fragment streamFragment on Stream {
+  __typename
+  id
+}
+
+query streams {
+  streams {
+    ...streamFragment
+  }
+}
+
+mutation createStream($uuid: ID!) {
+  createStream(uuid: $uuid) {
+    ...streamFragment
+  }
+}
+
+subscription subStreams {
+  streams {
+    ...streamFragment
+  }
+}
