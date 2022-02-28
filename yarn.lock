@@ -4540,6 +4540,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@streamwith.me/api@workspace:_services/api":
+  version: 0.0.0-use.local
+  resolution: "@streamwith.me/api@workspace:_services/api"
+  dependencies:
+    "@nestjs/apollo": ^10.0.5
+    "@nestjs/axios": ^0.0.6
+    "@nestjs/cli": ^8.0.0
+    "@nestjs/common": ^8.0.0
+    "@nestjs/config": ^1.2.0
+    "@nestjs/core": ^8.0.0
+    "@nestjs/graphql": ^10.0.5
+    "@nestjs/platform-express": ^8.0.0
+    "@nestjs/schematics": ^8.0.0
+    "@nestjs/testing": ^8.0.0
+    "@types/express": ^4.17.13
+    "@types/jest": 27.4.1
+    "@types/node": ^16.0.0
+    "@types/supertest": ^2.0.11
+    "@typescript-eslint/eslint-plugin": ^5.0.0
+    "@typescript-eslint/parser": ^5.0.0
+    apollo-server-express: ^3.6.3
+    eslint: ^8.0.1
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    graphql: ^16.3.0
+    graphql-redis-subscriptions: ^2.4.2
+    graphql-subscriptions: ^2.0.0
+    graphql-transport-ws: ^1.9.0
+    graphql-ws: ^5.6.2
+    jest: ^27.2.5
+    prettier: ^2.3.2
+    reflect-metadata: ^0.1.13
+    rimraf: ^3.0.2
+    rxjs: ^7.2.0
+    source-map-support: ^0.5.20
+    subscriptions-transport-ws: ^0.11.0
+    supertest: ^6.1.3
+    ts-jest: ^27.0.3
+    ts-loader: ^9.2.3
+    ts-node: ^10.0.0
+    tsconfig-paths: ^3.10.1
+    typescript: ^4.3.5
+  languageName: unknown
+  linkType: soft
+
 "@streamwith.me/client@workspace:_services/client":
   version: 0.0.0-use.local
   resolution: "@streamwith.me/client@workspace:_services/client"
@@ -5406,7 +5451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accepts@npm:^1.3.5, accepts@npm:^1.3.7, accepts@npm:~1.3.5, accepts@npm:~1.3.7, accepts@npm:~1.3.8":
+"accepts@npm:^1.3.5, accepts@npm:^1.3.7, accepts@npm:~1.3.5, accepts@npm:~1.3.7":
   version: 1.3.8
   resolution: "accepts@npm:1.3.8"
   dependencies:
@@ -5699,52 +5744,6 @@ __metadata:
   checksum: 985163db2292fac9e5a1e072bf99f1b5baccf196e4de25a0b0b81865ebddeb3b3eb4480734ef0a2ac8c002845396b91aa89121f5b84f93981a4658164a9ec6e9
   languageName: node
   linkType: hard
-
-"api@workspace:_services/api":
-  version: 0.0.0-use.local
-  resolution: "api@workspace:_services/api"
-  dependencies:
-    "@nestjs/apollo": ^10.0.5
-    "@nestjs/axios": ^0.0.6
-    "@nestjs/cli": ^8.0.0
-    "@nestjs/common": ^8.0.0
-    "@nestjs/config": ^1.2.0
-    "@nestjs/core": ^8.0.0
-    "@nestjs/graphql": ^10.0.5
-    "@nestjs/platform-express": ^8.0.0
-    "@nestjs/schematics": ^8.0.0
-    "@nestjs/testing": ^8.0.0
-    "@types/express": ^4.17.13
-    "@types/jest": 27.4.1
-    "@types/node": ^16.0.0
-    "@types/supertest": ^2.0.11
-    "@typescript-eslint/eslint-plugin": ^5.0.0
-    "@typescript-eslint/parser": ^5.0.0
-    apollo-server-express: ^3.6.3
-    eslint: ^8.0.1
-    eslint-config-prettier: ^8.3.0
-    eslint-plugin-prettier: ^4.0.0
-    graphql: ^16.3.0
-    graphql-redis-subscriptions: ^2.4.2
-    graphql-subscriptions: ^2.0.0
-    graphql-transport-ws: ^1.9.0
-    graphql-ws: ^5.6.2
-    jest: ^27.2.5
-    node-media-server: ^2.3.8
-    prettier: ^2.3.2
-    reflect-metadata: ^0.1.13
-    rimraf: ^3.0.2
-    rxjs: ^7.2.0
-    source-map-support: ^0.5.20
-    subscriptions-transport-ws: ^0.11.0
-    supertest: ^6.1.3
-    ts-jest: ^27.0.3
-    ts-loader: ^9.2.3
-    ts-node: ^10.0.0
-    tsconfig-paths: ^3.10.1
-    typescript: ^4.3.5
-  languageName: unknown
-  linkType: soft
 
 "apollo-datasource@npm:^3.3.1":
   version: 3.3.1
@@ -6331,13 +6330,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"basic-auth-connect@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "basic-auth-connect@npm:1.0.0"
-  checksum: f62e7fd17c9fce3915956707878a2bed9670a0f179ca82cc413882d24acd4d7f42eb6a17ccc3b863c401ab0ba06ffe9f8dd24c295374494fd616e0acaa69f669
-  languageName: node
-  linkType: hard
-
 "big-integer@npm:1.6.x":
   version: 1.6.51
   resolution: "big-integer@npm:1.6.51"
@@ -6388,7 +6380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.19.2, body-parser@npm:^1.19.0":
+"body-parser@npm:^1.19.0":
   version: 1.19.2
   resolution: "body-parser@npm:1.19.2"
   dependencies:
@@ -7326,13 +7318,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.4.2":
-  version: 0.4.2
-  resolution: "cookie@npm:0.4.2"
-  checksum: a00833c998bedf8e787b4c342defe5fa419abd96b32f4464f718b91022586b8f1bafbddd499288e75c037642493c83083da426c6a9080d309e3bd90fd11baa9b
-  languageName: node
-  linkType: hard
-
 "cookiejar@npm:^2.1.3":
   version: 2.1.3
   resolution: "cookiejar@npm:2.1.3"
@@ -7597,13 +7582,6 @@ __metadata:
   version: 1.30.1
   resolution: "date-fns@npm:1.30.1"
   checksum: 86b1f3269cbb1f3ee5ac9959775ea6600436f4ee2b78430cd427b41a0c9fabf740b1a5d401c085f3003539a6f4755c7c56c19fbd70ce11f6f673f6bc8075b710
-  languageName: node
-  linkType: hard
-
-"dateformat@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "dateformat@npm:3.0.3"
-  checksum: ca4911148abb09887bd9bdcd632c399b06f3ecad709a18eb594d289a1031982f441e08e281db77ffebcb2cbcbfa1ac578a7cbfbf8743f41009aa5adc1846ed34
   languageName: node
   linkType: hard
 
@@ -8653,44 +8631,6 @@ __metadata:
     utils-merge: 1.0.1
     vary: ~1.1.2
   checksum: 1535d56d20e65a1a39b5f056c025dd635290a744478ac69cc47633aeb4b2ce51458f8eb4080cfb7ba47c853ba5cfd794d404cff822a25127f1556b726ec3914a
-  languageName: node
-  linkType: hard
-
-"express@npm:^4.16.4":
-  version: 4.17.3
-  resolution: "express@npm:4.17.3"
-  dependencies:
-    accepts: ~1.3.8
-    array-flatten: 1.1.1
-    body-parser: 1.19.2
-    content-disposition: 0.5.4
-    content-type: ~1.0.4
-    cookie: 0.4.2
-    cookie-signature: 1.0.6
-    debug: 2.6.9
-    depd: ~1.1.2
-    encodeurl: ~1.0.2
-    escape-html: ~1.0.3
-    etag: ~1.8.1
-    finalhandler: ~1.1.2
-    fresh: 0.5.2
-    merge-descriptors: 1.0.1
-    methods: ~1.1.2
-    on-finished: ~2.3.0
-    parseurl: ~1.3.3
-    path-to-regexp: 0.1.7
-    proxy-addr: ~2.0.7
-    qs: 6.9.7
-    range-parser: ~1.2.1
-    safe-buffer: 5.2.1
-    send: 0.17.2
-    serve-static: 1.14.2
-    setprototypeof: 1.2.0
-    statuses: ~1.5.0
-    type-is: ~1.6.18
-    utils-merge: 1.0.1
-    vary: ~1.1.2
-  checksum: 967e53b74a37eafdf9789b9938c8df86102928b4985b1ad5e385c709deeab405a364de95ca744bc2cc5d05b5d9cc1efc69ae2ae17688a462038648d5a924bfad
   languageName: node
   linkType: hard
 
@@ -11857,7 +11797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:>=4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
+"lodash@npm:4.17.21, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -12662,15 +12602,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:1.0.3":
-  version: 1.0.3
-  resolution: "mkdirp@npm:1.0.3"
-  bin:
-    mkdirp: bin/cmd.js
-  checksum: c5c46ae41770edd318df35b0bccd50f977dab02a6617dbae80e716dcd3f28b51c8944968247e2be885f2dd3a56963dda492a2478a916b821620438a69224b671
-  languageName: node
-  linkType: hard
-
 "mkdirp@npm:^0.5.1, mkdirp@npm:^0.5.4":
   version: 0.5.5
   resolution: "mkdirp@npm:0.5.5"
@@ -12944,24 +12875,6 @@ __metadata:
   version: 0.4.0
   resolution: "node-int64@npm:0.4.0"
   checksum: d0b30b1ee6d961851c60d5eaa745d30b5c95d94bc0e74b81e5292f7c42a49e3af87f1eb9e89f59456f80645d679202537de751b7d72e9e40ceea40c5e449057e
-  languageName: node
-  linkType: hard
-
-"node-media-server@npm:^2.3.8":
-  version: 2.3.8
-  resolution: "node-media-server@npm:2.3.8"
-  dependencies:
-    basic-auth-connect: ^1.0.0
-    chalk: ^2.4.2
-    dateformat: ^3.0.3
-    express: ^4.16.4
-    lodash: ">=4.17.13"
-    minimist: ^1.2.5
-    mkdirp: 1.0.3
-    ws: ^7.4.6
-  bin:
-    node-media-server: bin/app.js
-  checksum: 1b9fb2eb70eab9d9181368a8bc29a51acfb3fa93ca14ecf7a3d7d4d6655b4becc3f17ec94e17c36f3b0aaf13f879499f73f8c1e082c340adf4595229bdb647f6
   languageName: node
   linkType: hard
 
