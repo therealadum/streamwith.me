@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-const NodeMediaServer = require('node-media-server')
+const NodeMediaServer = require('node-media-server');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,13 +14,13 @@ const config = {
     chunk_size: 60000,
     gop_cache: true,
     ping: 30,
-    ping_timeout: 60
+    ping_timeout: 60,
   },
   http: {
     port: 8000,
-    allow_origin: '*'
-  }
+    allow_origin: '*',
+  },
 };
 
-var nms = new NodeMediaServer(config)
+var nms = new NodeMediaServer(config);
 nms.run();
