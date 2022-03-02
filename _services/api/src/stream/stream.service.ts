@@ -15,11 +15,16 @@ export class StreamService {
   async list() {
     const request = await firstValueFrom(
       this.httpService.get(
-        `https://${this.configService.get('LIVE_URL')}/api/streams`,
+        `${this.configService.get(
+          'LIVE_URL',
+        )}/WebRTCAppEE/rest/v2/broadcasts/list/0/50`,
       ),
     );
-    const streamKeys = Object.keys(request.data.live);
-    return streamKeys.filter((id) => id !== 'final').map((id) => ({ id }));
+    const arr = new Array<any>();
+    for (let i = 0; i < request?.data?.length; i++) {
+      arr.push({ id: request?.data[i].streamId });
+    }
+    return arr;
   }
 
   async create(uuid: string) {
