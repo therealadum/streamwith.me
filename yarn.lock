@@ -4978,6 +4978,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@streamwith.me/website@workspace:_services/website":
+  version: 0.0.0-use.local
+  resolution: "@streamwith.me/website@workspace:_services/website"
+  dependencies:
+    "@headlessui/react": ^1.5.0
+    "@heroicons/react": ^1.0.6
+    "@tailwindcss/aspect-ratio": ^0.4.0
+    "@tailwindcss/forms": ^0.5.0
+    "@types/node": ^12.12.21
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
+    next: latest
+    postcss-preset-env: ^7.4.2
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    tailwindcss: ^3.0.23
+    typescript: 4.0
+  languageName: unknown
+  linkType: soft
+
 "@szmarczak/http-timer@npm:^1.1.2":
   version: 1.1.2
   resolution: "@szmarczak/http-timer@npm:1.1.2"
@@ -22082,26 +22102,6 @@ __metadata:
   checksum: 5a44664a840fd64c5383aa78847b205ae0b42b607f85ee1d6a568617a210c1b9caab1822bce40a89a3b5eb0f626a83fb5fe2055c638aa230897bf224030d28e8
   languageName: node
   linkType: hard
-
-"website-9722fc@workspace:_services/website":
-  version: 0.0.0-use.local
-  resolution: "website-9722fc@workspace:_services/website"
-  dependencies:
-    "@headlessui/react": ^1.5.0
-    "@heroicons/react": ^1.0.6
-    "@tailwindcss/aspect-ratio": ^0.4.0
-    "@tailwindcss/forms": ^0.5.0
-    "@types/node": ^12.12.21
-    "@types/react": ^17.0.2
-    "@types/react-dom": ^17.0.1
-    next: latest
-    postcss-preset-env: ^7.4.2
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    tailwindcss: ^3.0.23
-    typescript: 4.0
-  languageName: unknown
-  linkType: soft
 
 "whatwg-encoding@npm:^1.0.5":
   version: 1.0.5

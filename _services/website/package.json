@@ -1,5 +1,10 @@
 {
+  "name": "@streamwith.me/website",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
   "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next",
     "build": "next build",
