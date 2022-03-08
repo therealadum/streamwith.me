@@ -7,8 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "next",
-    "build": "yarn dlx next build",
-    "start": "yarn dlx next start",
+    "build": "yarn install && next build",
+    "start": "yarn install && next start",
     "type-check": "tsc"
   },
   "dependencies": {
