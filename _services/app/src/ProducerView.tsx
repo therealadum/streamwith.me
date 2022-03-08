@@ -1,40 +1,44 @@
 import {
+  Actionsheet,
+  Box,
   Button,
   Center,
   Container,
+  FormControl,
   Heading,
   Icon,
+  Input,
+  ScrollView,
   Stack,
   Text,
-  VStack,
+  useDisclose,
+  Modal,
 } from "native-base";
 import React, { useRef, useState } from "react";
-import { View } from "react-native";
+import { Dimensions, Platform, View } from "react-native";
 import { WebView } from "./lib/WebView";
 import { useNavigation } from "@react-navigation/core";
 import {
+  useSetStreamStateMutation,
   useStreamsQuery,
   useSubStreamsSubscription,
 } from "./generated/graphql";
 import { useEffect } from "react";
 import { LIVE_URL } from "./config";
-import {
-  RTCSessionDescriptionType,
-  RTCView,
-  toURL,
-  RTCPeerConnection,
-} from "./lib/WebRTC";
-import { SignalingChannel } from "./lib/SignalingChannel";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Pressable } from "react-native";
+import OutputView from "./components/OutputView";
 
 export default function ProducerView() {
   const nav = useNavigation<any>();
   const { data: queryData, loading: queryLoading } = useStreamsQuery();
   const { data: subData } = useSubStreamsSubscription();
 
-  const [streams, setStreams] = useState<any>([]);
-  const [remoteStreams, setRemoteStreams] = useState<MediaStream[]>([]);
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const [streams, setStreams] = useState<any>();
   useEffect(() => {
-    if (!queryLoading && streams.length === 0 && queryData?.streams?.length) {
+    if (!queryLoading && !streams && queryData?.streams?.length) {
       setStreams(queryData.streams);
     }
   }, [queryLoading]);
@@ -43,124 +47,154 @@ export default function ProducerView() {
       setStreams(subData.streams);
     }
   }, [subData?.streams?.length]);
+  const streamTouples = new Array<any[]>();
+  for (let i = 0; i < streams?.length; i += 2) {
+    if (streams[i + 1]) {
+      streamTouples.push([streams[i], streams[i + 1]]);
+    } else {
+      streamTouples.push([streams[i]]);
+    }
+  }
+  const [focusedStream, setFocusedStream] = useState<any>();
 
-  const peerConnection = useRef<RTCPeerConnection>();
-
-  const startStreaming = async (
-    remoteDescription: RTCSessionDescriptionType
-  ) => {
-    peerConnection.current = new RTCPeerConnection({
-      iceServers: [],
-    });
-
-    peerConnection.current.onaddstream = (event) => {
-      console.log("on add stream");
-      setRemoteStreams([...remoteStreams, event.stream]);
-    };
-
-    peerConnection.current.onremovestream = () => console.log("stream removed");
-
-    peerConnection.current.onconnectionstatechange = (event) =>
-      console.log(
-        "state change connection: ",
-        peerConnection.current?.connectionState
-      );
-
-    peerConnection.current.onsignalingstatechange = () =>
-      console.log(peerConnection.current?.signalingState);
-
-    peerConnection.current.onicecandidateerror = console.log;
-
-    peerConnection.current.onicecandidate = (event) => {
-      const candidate = event.candidate;
-      if (
-        candidate &&
-        streams &&
-        streams.length &&
-        signalingChannel.current?.isChannelOpen() &&
-        peerConnection.current?.signalingState === "have-remote-offer"
-      ) {
-        console.log("sending local ice candidates");
-        signalingChannel.current?.sendJSON({
-          command: "takeCandidate",
-          streamId: streams[0].id,
-          label: candidate.sdpMLineIndex.toString(),
-          id: candidate.sdpMid,
-          candidate: candidate.candidate,
-        });
-      }
-    };
-
-    await peerConnection.current?.setRemoteDescription(remoteDescription);
-
-    const answer = await peerConnection.current.createAnswer();
-    await peerConnection.current.setLocalDescription(answer);
-  };
-
-  const signalingChannel = useRef<SignalingChannel>(
-    new SignalingChannel(`ws://${LIVE_URL}:5080/WebRTCAppEE/websocket`, {
-      onopen: () => {
-        streams && streams.length
-          ? signalingChannel.current?.sendJSON({
-              command: "play",
-              streamId: streams[0].id,
-            })
-          : null;
+  const [setStreamState] = useSetStreamStateMutation({
+    variables: {
+      streamStateInput: {
+        mode: "THEATRE",
+        metadata: [
+          {
+            key: "main",
+            value: focusedStream,
+          },
+        ],
       },
-      start: async () => {},
-      stop: () => {
-        console.log("stop called");
-      },
-      takeCandidate: (data) => {
-        console.log("onIceCandidate remote");
-        peerConnection.current
-          ?.addIceCandidate({
-            candidate: data?.candidate || "",
-            sdpMLineIndex: Number(data?.label) || 0,
-            sdpMid: data?.id || "",
-          })
-          .catch((error) => console.log(error));
-      },
-      takeConfiguration: async (data) => {
-        console.log("got offer: ", data?.type);
-        const offer = data?.sdp || "";
-
-        await startStreaming({
-          sdp: offer,
-          type: data?.type || "",
-        });
-
-        streams && streams.length;
-        signalingChannel.current?.sendJSON({
-          command: "takeConfiguration",
-          streamId: streams[0].id,
-          type: "answer",
-          sdp: peerConnection?.current?.localDescription?.sdp,
-        });
-      },
-    })
-  );
-
-  useEffect(() => {
-    return () => {
-      signalingChannel.current.close();
-    };
-  }, []);
+    },
+  });
   return (
-    <Container padding="4" flex={1}>
-      <Stack direction="column" flex={1} bg="primary.100">
-        {streams?.map((stream: any) => {
-          return (
-            <WebView
-              key={stream.id}
-              source={{
-                uri: `http://live.streamwith.me:5080/WebRTCAppEE/play.html?name=${stream.id}`,
-              }}
-              style={{ flex: 1 }}
-            />
-          );
-        })}
-      </Stack>
-    </Container>
+    // <Stack direction="column" flex={1} bg="primary.100">
+    //   {streams?.map((stream: any) => {
+    //     return (
+    //       <WebView
+    //         key={stream.id}
+    //         mediaPlaybackRequiresUserAction={
+    //           Platform.OS !== "android" || Platform.Version >= 17
+    //             ? false
+    //             : undefined
+    //         }
+    //         allowsInlineMediaPlayback={true}
+    //         userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+    //         source={{
+    //           uri: `http://live.streamwith.me:5080/WebRTCApp/play.html?name=${stream.id}`,
+    //         }}
+    //         style={{ flex: 1 }}
+    //       />
+    //     );
+    //   })}
+    // </Stack>
+    <>
+      <View
+        style={{ flex: 1, backgroundColor: "red", flexDirection: "column" }}
+      >
+        <View
+          style={{
+            width: Dimensions.get("window").width,
+            height: (Dimensions.get("window").width * 9) / 16,
+          }}
+        >
+          <OutputView />
+        </View>
+        <ScrollView
+          flexGrow={1}
+          bg="primary.200"
+          showsVerticalScrollIndicator={false}
+        >
+          {streamTouples.map((streamTouple: any[], i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                {streamTouple.map((stream: any) => {
+                  return (
+                    <Pressable
+                      onPress={() => {
+                        setFocusedStream(stream.id);
+                        onOpen();
+                      }}
+                      key={stream.id}
+                    >
+                      <WebView
+                        mediaPlaybackRequiresUserAction={
+                          Platform.OS !== "android" || Platform.Version >= 17
+                            ? false
+                            : undefined
+                        }
+                        allowsInlineMediaPlayback={true}
+                        userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+                        source={{
+                          uri: `http://live.streamwith.me:5080/WebRTCApp/play.html?name=${stream.id}`,
+                        }}
+                        pointerEvents="none"
+                        style={{
+                          width: Dimensions.get("window").width / 2,
+                          height: (Dimensions.get("window").width * 9) / 32,
+                        }}
+                      />
+                    </Pressable>
+                  );
+                })}
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal.Content>
+          <WebView
+            mediaPlaybackRequiresUserAction={
+              Platform.OS !== "android" || Platform.Version >= 17
+                ? false
+                : undefined
+            }
+            allowsInlineMediaPlayback={true}
+            userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+            source={{
+              uri: `http://live.streamwith.me:5080/WebRTCApp/play.html?name=${focusedStream}`,
+            }}
+            pointerEvents="none"
+            style={{
+              width: (Dimensions.get("window").width * 4) / 5,
+              height: (((Dimensions.get("window").width * 9) / 16) * 4) / 5,
+            }}
+          />
+        </Modal.Content>
+      </Modal>
+      <Actionsheet isOpen={isOpen} onClose={onClose} disableOverlay>
+        <Actionsheet.Content>
+          <Actionsheet.Item
+            startIcon={
+              <Icon
+                as={MaterialIcons}
+                color="trueGray.400"
+                mr="1"
+                size="6"
+                name="photo-size-select-actual"
+              />
+            }
+            onPress={() => {
+              setStreamState();
+              onClose();
+            }}
+          >
+            Set Main
+          </Actionsheet.Item>
+          <Actionsheet.Item onPress={onClose}>Cancel</Actionsheet.Item>
+        </Actionsheet.Content>
+      </Actionsheet>
+    </>
   );
 }

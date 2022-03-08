@@ -66,7 +66,7 @@ export default function StreamView() {
   };
 
   const signalingChannel = useRef<SignalingChannel>(
-    new SignalingChannel(`ws://${LIVE_URL}:5080/WebRTCAppEE/websocket`, {
+    new SignalingChannel(`ws://${LIVE_URL}:5080/WebRTCApp/websocket`, {
       onopen: () => {
         signalingChannel.current?.sendJSON({
           command: "publish",
@@ -124,12 +124,9 @@ export default function StreamView() {
       const media = await mediaDevices.getUserMedia({
         audio: true,
         video: {
-          facingMode: isFrontCamera ? "user" : "environment",
-          mandatory: {
-            minFrameRate: 30,
-            minHeight: Dimensions.get("window").height * 1.5,
-            minWidth: Dimensions.get("window").width * 1.5,
-          },
+          facingMode: "environment",
+          width: { ideal: 4096 },
+          height: { ideal: 2160 },
           optional: sourceId,
         },
       });

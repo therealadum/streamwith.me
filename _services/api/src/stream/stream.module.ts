@@ -5,9 +5,10 @@ import { StreamService } from './stream.service';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
+import { RedisCacheModule } from '../_redis/redis.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, RedisCacheModule],
   providers: [
     StreamResolver,
     StreamService,

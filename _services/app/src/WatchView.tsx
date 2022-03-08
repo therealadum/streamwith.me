@@ -68,7 +68,7 @@ export default function WatchView() {
   };
 
   const signalingChannel = useRef<SignalingChannel>(
-    new SignalingChannel(`ws://${LIVE_URL}:5080/WebRTCAppEE/websocket`, {
+    new SignalingChannel(`ws://${LIVE_URL}:5080/WebRTCApp/websocket`, {
       onopen: () => {
         signalingChannel.current?.sendJSON({
           command: "play",

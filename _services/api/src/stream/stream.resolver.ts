@@ -11,7 +11,6 @@ export class StreamResolver {
 
   @Subscription('streams', {
     resolve: (payload) => {
-      console.log('HERE', payload);
       return payload.streams;
     },
   })
@@ -27,5 +26,24 @@ export class StreamResolver {
   @Query('streams')
   async queryStreams() {
     return this.streamService.list();
+  }
+
+  @Query('streamState')
+  async queryStreamState() {
+    return this.streamService.getStreamState();
+  }
+
+  @Mutation('setStreamState')
+  async setStreamState(@Args('streamStateInput') streamStateInput: any) {
+    return this.streamService.setStreamState(streamStateInput);
+  }
+
+  @Subscription('streamState', {
+    resolve: (payload) => {
+      return payload.streamState;
+    },
+  })
+  async streamState() {
+    return this.pubSubService.asyncIterator('streamState');
   }
 }

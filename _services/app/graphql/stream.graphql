@@ -3,6 +3,16 @@ fragment streamFragment on Stream {
   id
 }
 
+fragment streamStateFragment on StreamState {
+  __typename
+  mode
+  metadata {
+    __typename
+    key
+    value
+  }
+}
+
 query streams {
   streams {
     ...streamFragment
@@ -18,5 +28,23 @@ mutation createStream($uuid: ID!) {
 subscription subStreams {
   streams {
     ...streamFragment
+  }
+}
+
+query streamState {
+  streamState {
+    ...streamStateFragment
+  }
+}
+
+subscription subStreamState {
+  streamState {
+    ...streamStateFragment
+  }
+}
+
+mutation setStreamState($streamStateInput: StreamStateInput!) {
+  setStreamState(streamStateInput: $streamStateInput) {
+    ...streamStateFragment
   }
 }

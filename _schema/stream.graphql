@@ -1,12 +1,31 @@
 type Stream {
   id: ID!
 }
+type StreamMetadata {
+  key: String!
+  value: String!
+}
+type StreamState {
+  mode: String!
+  metadata: [StreamMetadata]
+}
+input StreamMetadataInput {
+  key: String!
+  value: String!
+}
+input StreamStateInput {
+  mode: String!
+  metadata: [StreamMetadataInput]
+}
 extend type Query {
   streams: [Stream!]!
+  streamState: StreamState!
 }
 extend type Mutation {
   createStream(uuid: ID!): Stream!
+  setStreamState(streamStateInput: StreamStateInput!): StreamState!
 }
 extend type Subscription {
   streams: [Stream]
+  streamState: StreamState
 }
