@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "yarn dlx next build",
     "start": "yarn dlx next start",
     "type-check": "tsc"
   },
