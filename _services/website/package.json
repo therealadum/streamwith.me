@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "yarn dlx next start",
     "type-check": "tsc"
   },
   "dependencies": {
