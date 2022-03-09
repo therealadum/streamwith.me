@@ -371,7 +371,7 @@ export default function Example() {
                   <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                     <img
                       className="object-cover lg:h-full lg:w-full"
-                      src="https://beermile.com/adam.webp"
+                      src="/chris.webp"
                       alt=""
                     />
                   </div>
@@ -398,7 +398,7 @@ export default function Example() {
                     </div>
                     <footer className="mt-6">
                       <p className="text-base font-medium text-white">
-                        Adam Shurson
+                        Chris Robertson
                       </p>
                       <p className="text-base font-medium text-cyan-100">
                         Beer Mile Media
